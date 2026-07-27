@@ -6,18 +6,30 @@
     <title>MediPulse Enterprise | Clinical & Dosage Management</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Pro/Free -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Background Moving Gradient Animation */
+        @keyframes moveBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-bg {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #090d16);
+            background-size: 400% 400%;
+            animation: moveBackground 15s ease infinite;
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+<body class="animated-bg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
     <!-- TOP SYSTEM BAR -->
-    <div class="bg-blue-950/60 border-b border-blue-900/50 text-[11px] text-blue-300 px-4 py-1.5 flex justify-between items-center tracking-wider">
+    <div class="bg-blue-950/60 border-b border-blue-900/50 text-[11px] text-blue-300 px-4 py-1.5 flex justify-between items-center tracking-wider backdrop-blur-md">
         <div class="flex items-center space-x-2">
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>SECURE PYTHON FLASK BACKEND ACTIVE</span>
@@ -28,7 +40,7 @@
     </div>
 
     <!-- MAIN HEADER -->
-    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+    <header class="bg-slate-950/70 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50 shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 text-white p-3.5 rounded-2xl shadow-lg shadow-blue-500/20 flex items-center justify-center">
@@ -39,27 +51,27 @@
                     <p class="text-xs text-slate-400 font-medium">Clinical Dosage & Intelligent Medication Schedule System</p>
                 </div>
             </div>
-            <button id="load-demo-btn" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold rounded-xl text-slate-200 shadow-md transition flex items-center space-x-2 group">
+            <button id="load-demo-btn" class="px-4 py-2.5 bg-slate-900/80 hover:bg-slate-800 border border-slate-700 text-xs font-bold rounded-xl text-slate-200 shadow-md transition flex items-center space-x-2 group">
                 <i class="fa-solid fa-database text-blue-400 group-hover:rotate-12 transition-transform"></i>
                 <span>Load Live Demo Data</span>
             </button>
         </div>
         
         <!-- NAVIGATION -->
-        <nav class="bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80">
-            <div class="max-w-7xl mx-auto flex space-x-2 overflow-x-auto py-3 text-xs sm:text-sm font-semibold no-scrollbar">
+        <nav class="bg-slate-950/40 px-4 sm:px-6 lg:px-8 border-t border-slate-800/60">
+            <div class="max-w-7xl mx-auto flex space-x-2 overflow-x-auto py-3 text-xs sm:text-sm font-semibold">
                 <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2.5 rounded-xl bg-blue-600 text-white flex items-center space-x-2 transition shadow-lg shadow-blue-600/30"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></button>
-                <button onclick="switchTab('addMedicine')" id="nav-addMedicine" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-circle-plus"></i><span>Add Prescription</span></button>
-                <button onclick="switchTab('dosageCalculator')" id="nav-dosageCalculator" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-calculator"></i><span>Python Dosage Engine</span></button>
-                <button onclick="switchTab('reminders')" id="nav-reminders" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-clock"></i><span>Active Reminders</span></button>
-                <button onclick="switchTab('history')" id="nav-history" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-history"></i><span>Audit History</span></button>
-                <button onclick="switchTab('aboutProject')" id="nav-aboutProject" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-shield-halved"></i><span>System Specs</span></button>
+                <button onclick="switchTab('addMedicine')" id="nav-addMedicine" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800/60 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-circle-plus"></i><span>Add Prescription</span></button>
+                <button onclick="switchTab('dosageCalculator')" id="nav-dosageCalculator" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800/60 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-calculator"></i><span>Python Dosage Engine</span></button>
+                <button onclick="switchTab('reminders')" id="nav-reminders" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800/60 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-clock"></i><span>Active Reminders</span></button>
+                <button onclick="switchTab('history')" id="nav-history" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800/60 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-history"></i><span>Audit History</span></button>
+                <button onclick="switchTab('aboutProject')" id="nav-aboutProject" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800/60 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-shield-halved"></i><span>System Specs</span></button>
             </div>
         </nav>
     </header>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900 border border-slate-700 text-white px-5 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-semibold flex items-center space-x-3">
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900/90 backdrop-blur-md border border-slate-700 text-white px-5 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-semibold flex items-center space-x-3">
         <div class="bg-emerald-500/20 text-emerald-400 p-1.5 rounded-full"><i class="fa-solid fa-check text-xs"></i></div>
         <span id="toast-msg">Operation successful</span>
     </div>
@@ -68,7 +80,7 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
         <!-- DISCLAIMER BANNER -->
-        <div class="bg-slate-900 border border-amber-500/30 p-4 rounded-2xl shadow-lg flex items-start space-x-3.5">
+        <div class="bg-slate-900/80 backdrop-blur-md border border-amber-500/30 p-4 rounded-2xl shadow-lg flex items-start space-x-3.5">
             <div class="bg-amber-500/10 p-2 rounded-xl text-amber-500"><i class="fa-solid fa-triangle-exclamation text-base"></i></div>
             <div>
                 <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">Clinical Validation Notice</h3>
@@ -78,7 +90,7 @@
 
         <!-- DASHBOARD TAB -->
         <section id="tab-dashboard" class="tab-content space-y-6">
-            <div class="relative bg-gradient-to-br from-blue-900/40 via-slate-900 to-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 shadow-2xl overflow-hidden">
+            <div class="relative bg-gradient-to-br from-blue-950/50 via-slate-900/80 to-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-3xl p-8 sm:p-10 shadow-2xl overflow-hidden">
                 <div class="relative z-10 max-w-2xl">
                     <span class="px-3 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-full text-xs font-bold uppercase tracking-wider">Enterprise Architecture</span>
                     <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-4 tracking-tight">Intelligent Medicine & Dosage Automation</h2>
@@ -90,19 +102,19 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-lg">
+                <div class="bg-slate-900/70 backdrop-blur-md border border-slate-800/80 p-6 rounded-3xl shadow-xl">
                     <div class="flex items-center justify-between text-slate-400 mb-3"><span class="text-xs font-bold uppercase tracking-wider">Total Active</span><i class="fa-solid fa-pills text-blue-500"></i></div>
                     <p id="stat-total" class="text-3xl font-black text-white">0</p>
                 </div>
-                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-lg">
+                <div class="bg-slate-900/70 backdrop-blur-md border border-slate-800/80 p-6 rounded-3xl shadow-xl">
                     <div class="flex items-center justify-between text-slate-400 mb-3"><span class="text-xs font-bold uppercase tracking-wider">Completed</span><i class="fa-solid fa-circle-check text-emerald-500"></i></div>
                     <p id="stat-taken" class="text-3xl font-black text-emerald-400">0</p>
                 </div>
-                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-lg">
+                <div class="bg-slate-900/70 backdrop-blur-md border border-slate-800/80 p-6 rounded-3xl shadow-xl">
                     <div class="flex items-center justify-between text-slate-400 mb-3"><span class="text-xs font-bold uppercase tracking-wider">Pending</span><i class="fa-solid fa-clock-rotate-left text-amber-500"></i></div>
                     <p id="stat-pending" class="text-3xl font-black text-amber-400">0</p>
                 </div>
-                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-lg">
+                <div class="bg-slate-900/70 backdrop-blur-md border border-slate-800/80 p-6 rounded-3xl shadow-xl">
                     <div class="flex items-center justify-between text-slate-400 mb-3"><span class="text-xs font-bold uppercase tracking-wider">Next Scheduled</span><i class="fa-solid fa-bell text-indigo-500"></i></div>
                     <p id="stat-next" class="text-xs font-extrabold text-white mt-1 truncate">None</p>
                 </div>
@@ -111,22 +123,22 @@
 
         <!-- ADD MEDICINE TAB -->
         <section id="tab-addMedicine" class="tab-content hidden space-y-6">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-xl mx-auto shadow-2xl">
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 max-w-xl mx-auto shadow-2xl">
                 <h2 class="text-xl font-bold text-white mb-1">New Prescription Entry</h2>
                 <p class="text-xs text-slate-400 mb-6">Register a medication schedule into the active database.</p>
                 <form id="med-form" onsubmit="addMedicine(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Medicine Name *</label>
-                        <input type="text" id="m-name" required placeholder="e.g. Amoxicillin 500mg" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                        <input type="text" id="m-name" required placeholder="e.g. Amoxicillin 500mg" class="w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Dosage Unit *</label>
-                            <input type="text" id="m-dosage" required placeholder="e.g. 1 Capsule" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                            <input type="text" id="m-dosage" required placeholder="e.g. 1 Capsule" class="w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Time *</label>
-                            <input type="time" id="m-time" required class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                            <input type="time" id="m-time" required class="w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
                         </div>
                     </div>
                     <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Save Schedule</button>
@@ -136,7 +148,7 @@
 
         <!-- DOSAGE CALCULATOR TAB -->
         <section id="tab-dosageCalculator" class="tab-content hidden space-y-6">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-xl mx-auto shadow-2xl">
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 max-w-xl mx-auto shadow-2xl">
                 <div class="flex items-center space-x-3 mb-4">
                     <div class="bg-blue-600/10 text-blue-400 p-2.5 rounded-xl"><i class="fa-solid fa-microchip"></i></div>
                     <div>
@@ -146,12 +158,12 @@
                 </div>
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Age</label><input type="number" id="calc-age" value="28" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
-                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Weight (kg)</label><input type="number" id="calc-weight" value="60" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Age</label><input type="number" id="calc-age" value="28" class="w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Weight (kg)</label><input type="number" id="calc-weight" value="60" class="w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Dose Rate (mg/kg/day)</label><input type="number" id="calc-dose" value="4" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
-                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Frequencies / Day</label><input type="number" id="calc-num" value="2" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Dose Rate (mg/kg/day)</label><input type="number" id="calc-dose" value="4" class="w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Frequencies / Day</label><input type="number" id="calc-num" value="2" class="w-full px-4 py-3 text-sm bg-slate-950/80 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
                     </div>
                     <button onclick="callPythonCalculator()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Compute via Python Backend</button>
                 </div>
@@ -165,7 +177,7 @@
 
         <!-- REMINDERS TAB -->
         <section id="tab-reminders" class="tab-content hidden space-y-6">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 shadow-2xl">
                 <h2 class="text-xl font-bold text-white mb-1">Active Reminder Schedules</h2>
                 <p class="text-xs text-slate-400 mb-6">Manage scheduled medications and record completion history.</p>
                 <div id="reminders-container" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
@@ -174,7 +186,7 @@
 
         <!-- HISTORY TAB -->
         <section id="tab-history" class="tab-content hidden space-y-6">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 shadow-2xl">
                 <h2 class="text-xl font-bold text-white mb-1">Audit & Consumption History</h2>
                 <p class="text-xs text-slate-400 mb-6">Archived log records of medication administration.</p>
                 <div class="overflow-x-auto">
@@ -188,15 +200,15 @@
 
         <!-- ABOUT PROJECT TAB -->
         <section id="tab-aboutProject" class="tab-content hidden space-y-6">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl space-y-4 text-xs sm:text-sm">
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 shadow-2xl space-y-4 text-xs sm:text-sm">
                 <h2 class="text-lg font-black text-white">System Specification Summary</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                    <div class="p-5 bg-slate-950 border border-slate-800 rounded-2xl">
+                    <div class="p-5 bg-slate-950/80 border border-slate-800 rounded-2xl">
                         <span class="text-slate-500 uppercase font-bold text-[10px]">Developer Identity</span>
                         <p class="font-extrabold text-white text-base mt-1">K. Sai Prasanna</p>
                         <p class="text-slate-400 text-xs mt-0.5">Roll No: 25B21A4601 | Department of CSC</p>
                     </div>
-                    <div class="p-5 bg-slate-950 border border-slate-800 rounded-2xl">
+                    <div class="p-5 bg-slate-950/80 border border-slate-800 rounded-2xl">
                         <span class="text-slate-500 uppercase font-bold text-[10px]">Project Scope</span>
                         <p class="font-extrabold text-white text-base mt-1">BEE + Programming + Engineering Chemistry</p>
                         <p class="text-slate-400 text-xs mt-0.5">Full-stack web engineering & algorithmic dosage safety.</p>
@@ -208,7 +220,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900/40 border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+    <footer class="bg-slate-950/60 backdrop-blur-md border-t border-slate-900 py-6 text-center text-xs text-slate-500">
         <p>MediPulse Pro Enterprise System &copy; 2026 | All Rights Reserved</p>
     </footer>
 
@@ -233,11 +245,11 @@
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.nav-btn').forEach(el => {
                 el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
-                el.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+                el.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800/60');
             });
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`nav-${tabId}`);
-            activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+            activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800/60');
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
             updateViews();
         }
@@ -259,7 +271,7 @@
                 rContainer.innerHTML = `<p class="text-xs text-slate-500 italic col-span-3">No active schedules found in system.</p>`;
             } else {
                 rContainer.innerHTML = medicines.map(m => `
-                    <div class="p-5 border border-slate-800 rounded-2xl bg-slate-950 space-y-3 shadow-md hover:border-slate-700 transition">
+                    <div class="p-5 border border-slate-800/80 rounded-2xl bg-slate-950/80 backdrop-blur-md space-y-3 shadow-md hover:border-slate-700 transition">
                         <div class="flex justify-between items-start">
                             <h3 class="font-bold text-white text-sm">${m.name}</h3>
                             <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full text-[10px] font-bold">${m.status}</span>
@@ -289,7 +301,7 @@
             saveData();
             showToast("Prescription scheduled successfully");
             document.getElementById('med-form').reset();
-            switchTab('reminders');
+            switch_tab('reminders');
         }
 
         function markTaken(id) {
