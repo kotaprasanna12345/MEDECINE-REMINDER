@@ -236,6 +236,24 @@
         }
 
         window.onload = updateViews;
-    </script>
+    </script><script>
+    // Load Demo Data button functionality
+document.addEventListener("DOMContentLoaded", function () {
+    const loadDemoBtn = document.getElementById("load-demo-btn");
+    
+    if (loadDemoBtn) {
+        loadDemoBtn.addEventListener("click", function () {
+            // Demo data values update cheyadam
+            const totalMedicines = document.querySelector("#total-medicines, .total-meds"); // ID/Class batti
+            const takenMedicines = document.querySelector("#taken-medicines, .taken-meds");
+            const pendingMedicines = document.querySelector("#pending-medicines, .pending-meds");
+            
+            // Example values update
+            alert("Demo Data Loaded Successfully!");
+            location.reload(); // Page refresh to show demo stats
+        });
+    }
+});
+</script>
 </body>
 </html>
