@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Reminder with Dosage Calculator</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white p-3 rounded-xl shadow-md">
+                    <i class="fa-solid fa-capsules text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold text-slate-900">MEDICINE REMINDER WITH DOSAGE CALCULATOR</h1>
+                    <p class="text-xs text-slate-500 font-medium">Python + JavaScript Web Application (Student: K. Sai Prasanna - 25B21A4601)</p>
+                </div>
+            </div>
+            <button onclick="loadDemoData()" class="px-3 py-1.5 border border-slate-300 text-xs font-semibold rounded-lg text-slate-700 bg-white hover:bg-slate-50 shadow-sm">
+                <i class="fa-solid fa-database mr-1 text-blue-600"></i> Load Demo Data
+            </button>
+        </div>
+        <!-- NAVIGATION -->
+        <nav class="bg-slate-900 text-slate-300 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex space-x-4 overflow-x-auto py-2.5 text-xs sm:text-sm font-medium">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-2 rounded-lg bg-blue-600 text-white flex items-center space-x-2"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></button>
+                <button onclick="switchTab('addMedicine')" id="nav-addMedicine" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-800 flex items-center space-x-2"><i class="fa-solid fa-circle-plus"></i><span>Add Medicine</span></button>
+                <button onclick="switchTab('dosageCalculator')" id="nav-dosageCalculator" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-800 flex items-center space-x-2"><i class="fa-solid fa-calculator"></i><span>Dosage Calculator (Python API)</span></button>
+                <button onclick="switchTab('reminders')" id="nav-reminders" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-800 flex items-center space-x-2"><i class="fa-solid fa-clock"></i><span>Reminders</span></button>
+                <button onclick="switchTab('history')" id="nav-history" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-800 flex items-center space-x-2"><i class="fa-solid fa-history"></i><span>History</span></button>
+                <button onclick="switchTab('aboutProject')" id="nav-aboutProject" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-800 flex items-center space-x-2"><i class="fa-solid fa-circle-info"></i><span>About Project</span></button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <!-- SAFETY NOTICE -->
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-sm flex items-start space-x-3">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 text-lg mt-0.5"></i>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-amber-800">Educational Safety Notice</h3>
+                <p class="text-xs sm:text-sm text-amber-900 mt-0.5">This tool is for educational demonstration only. Consult a qualified doctor or pharmacist for actual dosage decisions.</p>
+            </div>
+        </div>
+
+        <!-- DASHBOARD TAB -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold">Stay organised with your medicine schedule.</h2>
+                    <p class="text-blue-100 text-sm mt-1">BEE + Programming + Engineering Chemistry College Mini-Project</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm"><span class="text-xs font-bold text-slate-500 uppercase">Total Medicines</span><p id="stat-total" class="text-3xl font-extrabold mt-2">0</p></div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm"><span class="text-xs font-bold text-slate-500 uppercase">Taken</span><p id="stat-taken" class="text-3xl font-extrabold mt-2 text-green-600">0</p></div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm"><span class="text-xs font-bold text-slate-500 uppercase">Pending</span><p id="stat-pending" class="text-3xl font-extrabold mt-2 text-amber-600">0</p></div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm"><span class="text-xs font-bold text-slate-500 uppercase">Next Reminder</span><p id="stat-next" class="text-sm font-bold mt-2">None</p></div>
+            </div>
+        </section>
+
+        <!-- ADD MEDICINE TAB -->
+        <section id="tab-addMedicine" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 max-w-2xl mx-auto">
+                <h2 class="text-lg font-bold text-slate-900 mb-4">Add New Medicine</h2>
+                <form id="med-form" onsubmit="addMedicine(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase mb-1">Medicine Name *</label>
+                        <input type="text" id="m-name" required placeholder="e.g. Paracetamol" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-300">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Dosage *</label>
+                            <input type="text" id="m-dosage" required placeholder="e.g. 500 mg" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-300">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Time *</label>
+                            <input type="time" id="m-time" required class="w-full px-3 py-2 text-sm rounded-xl border border-slate-300">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2.5 rounded-xl shadow">Save Medicine & Schedule Reminder</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- DOSAGE CALCULATOR TAB (Connected to Python Backend API) -->
+        <section id="tab-dosageCalculator" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 max-w-2xl mx-auto">
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Educational Dosage Calculator (Python Backend API)</h2>
+                <p class="text-xs text-slate-500 mb-4">Calculates values securely using Python backend validation rules.</p>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-bold uppercase mb-1">Age</label><input type="number" id="calc-age" value="25" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-300"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1">Weight (kg)</label><input type="number" id="calc-weight" value="50" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-300"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-bold uppercase mb-1">Dose per kg (mg/kg/day)</label><input type="number" id="calc-dose" value="2" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-300"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1">Doses per Day</label><input type="number" id="calc-num" value="2" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-300"></div>
+                    </div>
+                    <button onclick="callPythonCalculator()" class="w-full bg-blue-600 text-white font-bold py-2.5 rounded-xl shadow">Calculate via Python API</button>
+                </div>
+                <div id="calc-output" class="hidden mt-6 p-4 bg-slate-900 text-white rounded-xl text-xs space-y-2">
+                    <p id="calc-msg" class="font-bold text-blue-400"></p>
+                    <p id="calc-res-daily"></p>
+                    <p id="calc-res-admin"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- REMINDERS TAB -->
+        <section id="tab-reminders" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                <h2 class="text-lg font-bold text-slate-900 mb-4">Active Reminders</h2>
+                <div id="reminders-container" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+            </div>
+        </section>
+
+        <!-- HISTORY TAB -->
+        <section id="tab-history" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                <h2 class="text-lg font-bold text-slate-900 mb-4">Medicine History Logs</h2>
+                <table class="w-full text-left text-xs">
+                    <thead><tr class="border-b text-slate-500 uppercase"><th class="py-2">Medicine</th><th class="py-2">Time</th><th class="py-2">Status</th></tr></thead>
+                    <tbody id="history-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ABOUT PROJECT TAB -->
+        <section id="tab-aboutProject" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4 text-xs sm:text-sm">
+                <h2 class="text-base font-bold text-slate-900">Project Details</h2>
+                <p><strong>Student:</strong> K. Sai Prasanna | <strong>Roll No:</strong> 25B21A4601 | <strong>Branch:</strong> CSC (Cyber Security)</p>
+                <p><strong>Combined Subjects:</strong> Basic Electrical Engineering + Programming + Engineering Chemistry</p>
+                <p><strong>Architecture:</strong> Python Flask Backend Server paired with a responsive JavaScript frontend.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        let medicines = JSON.parse(localStorage.getItem('meds')) || [
+            { id: 1, name: 'Demo Tablet', dosage: '500 mg', time: '08:00', status: 'Pending' }
+        ];
+        let historyLogs = JSON.parse(localStorage.getItem('logs')) || [];
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('bg-blue-600', 'text-white'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`nav-${tabId}`).classList.add('bg-blue-600', 'text-white');
+            updateViews();
+        }
+
+        function saveData() {
+            localStorage.setItem('meds', JSON.stringify(medicines));
+            localStorage.setItem('logs', JSON.stringify(historyLogs));
+            updateViews();
+        }
+
+        function updateViews() {
+            document.getElementById('stat-total').innerText = medicines.length;
+            document.getElementById('stat-taken').innerText = historyLogs.filter(l => l.status === 'Taken').length;
+            document.getElementById('stat-pending').innerText = medicines.filter(m => m.status === 'Pending').length;
+            document.getElementById('stat-next').innerText = medicines[0] ? `${medicines[0].name} (${medicines[0].time})` : 'None';
+
+            const rContainer = document.getElementById('reminders-container');
+            rContainer.innerHTML = medicines.map(m => `
+                <div class="p-4 border rounded-xl bg-slate-50 space-y-2">
+                    <h3 class="font-bold text-slate-900">${m.name}</h3>
+                    <p class="text-xs text-slate-600">Dosage: ${m.dosage} | Time: ${m.time}</p>
+                    <button onclick="markTaken(${m.id})" class="w-full bg-green-600 text-white py-1.5 rounded-lg text-xs font-bold">Mark as Taken</button>
+                </div>
+            `).join('');
+
+            const hBody = document.getElementById('history-body');
+            hBody.innerHTML = historyLogs.map(h => `
+                <tr class="border-b"><td class="py-2 font-bold">${h.name}</td><td class="py-2">${h.time}</td><td class="py-2 font-bold text-green-600">${h.status}</td></tr>
+            `).join('');
+        }
+
+        function addMedicine(e) {
+            e.preventDefault();
+            const name = document.getElementById('m-name').value;
+            const dosage = document.getElementById('m-dosage').value;
+            const time = document.getElementById('m-time').value;
+            medicines.push({ id: Date.now(), name, dosage, time, status: 'Pending' });
+            saveData();
+            switchTab('reminders');
+        }
+
+        function markTaken(id) {
+            const med = medicines.find(m => m.id === id);
+            if(med) {
+                med.status = 'Taken';
+                historyLogs.push({ name: med.name, time: new Date().toLocaleTimeString(), status: 'Taken' });
+                saveData();
+            }
+        }
+
+        async function callPythonCalculator() {
+            const data = {
+                age: document.getElementById('calc-age').value,
+                weight: document.getElementById('calc-weight').value,
+                dosePerKg: document.getElementById('calc-dose').value,
+                numDoses: document.getElementById('calc-num').value
+            };
+            const response = await fetch('/api/calculate-dosage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            const out = document.getElementById('calc-output');
+            out.classList.remove('hidden');
+            document.getElementById('calc-msg').innerText = result.message;
+            if(result.success) {
+                document.getElementById('calc-res-daily').innerText = `Calculated Daily Dose (Python): ${result.dailyDose} mg/day`;
+                document.getElementById('calc-res-admin').innerText = `Dose per Administration: ${result.dosePerAdmin} mg`;
+            } else {
+                document.getElementById('calc-res-daily').innerText = '';
+                document.getElementById('calc-res-admin').innerText = '';
+            }
+        }
+
+        window.onload = updateViews;
+    </script>
+</body>
+</html>
