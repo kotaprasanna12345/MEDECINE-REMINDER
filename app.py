@@ -20,7 +20,7 @@ def calculate_dosage():
         
         return jsonify({
             "success": True,
-            "message": "Dosage calculated successfully via Python backend rules.",
+            "message": "Algorithmic computation executed securely via Python.",
             "dailyDose": round(daily_dose, 2),
             "dosePerAdmin": round(dose_per_admin, 2)
         })
