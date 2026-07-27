@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,8 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
@@ -25,7 +23,7 @@
                     <p class="text-xs text-slate-500 font-medium">Python + JavaScript Web Application (Student: K. Sai Prasanna - 25B21A4601)</p>
                 </div>
             </div>
-            <button onclick="loadDemoData()" class="px-3 py-1.5 border border-slate-300 text-xs font-semibold rounded-lg text-slate-700 bg-white hover:bg-slate-50 shadow-sm">
+            <button id="load-demo-btn" class="px-3 py-1.5 border border-slate-300 text-xs font-semibold rounded-lg text-slate-700 bg-white hover:bg-slate-50 shadow-sm">
                 <i class="fa-solid fa-database mr-1 text-blue-600"></i> Load Demo Data
             </button>
         </div>
@@ -94,7 +92,7 @@
             </div>
         </section>
 
-        <!-- DOSAGE CALCULATOR TAB (Connected to Python Backend API) -->
+        <!-- DOSAGE CALCULATOR TAB -->
         <section id="tab-dosageCalculator" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 max-w-2xl mx-auto">
                 <h2 class="text-lg font-bold text-slate-900 mb-2">Educational Dosage Calculator (Python Backend API)</h2>
@@ -152,7 +150,8 @@
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
         let medicines = JSON.parse(localStorage.getItem('meds')) || [
-            { id: 1, name: 'Demo Tablet', dosage: '500 mg', time: '08:00', status: 'Pending' }
+            { id: 1, name: 'Demo Tablet', dosage: '500 mg', time: '08:00', status: 'Pending' },
+            { id: 2, name: 'Vitamin C', dosage: '250 mg', time: '14:00', status: 'Pending' }
         ];
         let historyLogs = JSON.parse(localStorage.getItem('logs')) || [];
 
@@ -235,25 +234,24 @@
             }
         }
 
-        window.onload = updateViews;
-    </script><script>
-    // Load Demo Data button functionality
-document.addEventListener("DOMContentLoaded", function () {
-    const loadDemoBtn = document.getElementById("load-demo-btn");
-    
-    if (loadDemoBtn) {
-        loadDemoBtn.addEventListener("click", function () {
-            // Demo data values update cheyadam
-            const totalMedicines = document.querySelector("#total-medicines, .total-meds"); // ID/Class batti
-            const takenMedicines = document.querySelector("#taken-medicines, .taken-meds");
-            const pendingMedicines = document.querySelector("#pending-medicines, .pending-meds");
-            
-            // Example values update
-            alert("Demo Data Loaded Successfully!");
-            location.reload(); // Page refresh to show demo stats
+        document.addEventListener("DOMContentLoaded", function () {
+            const loadDemoBtn = document.getElementById("load-demo-btn");
+            if (loadDemoBtn) {
+                loadDemoBtn.addEventListener("click", function () {
+                    medicines = [
+                        { id: 1, name: 'Paracetamol', dosage: '500 mg', time: '09:00', status: 'Pending' },
+                        { id: 2, name: 'Amoxicillin', dosage: '250 mg', time: '13:00', status: 'Pending' },
+                        { id: 3, name: 'Multivitamin', dosage: '1 tablet', time: '20:00', status: 'Pending' }
+                    ];
+                    historyLogs = [
+                        { name: 'Calcium Tablet', time: '07:30 AM', status: 'Taken' }
+                    ];
+                    saveData();
+                    alert("Demo Data Loaded Successfully!");
+                });
+            }
+            updateViews();
         });
-    }
-});
-</script>
+    </script>
 </body>
 </html>
