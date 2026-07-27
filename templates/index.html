@@ -3,140 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediCore | Professional Medicine Reminder & Dosage System</title>
+    <title>MediPulse Enterprise | Clinical & Dosage Management</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Pro/Free -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
-    <!-- HEADER -->
-    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-md text-white">
+    <!-- TOP SYSTEM BAR -->
+    <div class="bg-blue-950/60 border-b border-blue-900/50 text-[11px] text-blue-300 px-4 py-1.5 flex justify-between items-center tracking-wider">
+        <div class="flex items-center space-x-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>SECURE PYTHON FLASK BACKEND ACTIVE</span>
+        </div>
+        <div class="font-semibold">
+            DEVELOPER: K. SAI PRASANNA (25B21A4601) | CSC DEPT
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 text-white p-3 rounded-xl shadow-lg flex items-center justify-center">
+            <div class="flex items-center space-x-4">
+                <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 text-white p-3.5 rounded-2xl shadow-lg shadow-blue-500/20 flex items-center justify-center">
                     <i class="fa-solid fa-heart-pulse text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg sm:text-xl font-extrabold tracking-wide">MEDICORE PRO</h1>
-                    <p class="text-xs text-blue-400 font-medium">Advanced Clinical & Educational System | K. Sai Prasanna (25B21A4601)</p>
+                    <h1 class="text-xl sm:text-2xl font-black tracking-tight text-white">MEDIPULSE <span class="text-blue-500 font-light">PRO</span></h1>
+                    <p class="text-xs text-slate-400 font-medium">Clinical Dosage & Intelligent Medication Schedule System</p>
                 </div>
             </div>
-            <button id="load-demo-btn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-xs font-bold rounded-xl text-white shadow transition flex items-center space-x-2">
-                <i class="fa-solid fa-bolt"></i><span>Load Demo Data</span>
+            <button id="load-demo-btn" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold rounded-xl text-slate-200 shadow-md transition flex items-center space-x-2 group">
+                <i class="fa-solid fa-database text-blue-400 group-hover:rotate-12 transition-transform"></i>
+                <span>Load Live Demo Data</span>
             </button>
         </div>
+        
         <!-- NAVIGATION -->
-        <nav class="bg-slate-950 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
-            <div class="max-w-7xl mx-auto flex space-x-3 overflow-x-auto py-3 text-xs sm:text-sm font-semibold">
-                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 rounded-xl bg-blue-600 text-white flex items-center space-x-2 transition shadow"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></button>
-                <button onclick="switchTab('addMedicine')" id="nav-addMedicine" class="nav-btn px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center space-x-2 transition"><i class="fa-solid fa-circle-plus"></i><span>Add Medicine</span></button>
-                <button onclick="switchTab('dosageCalculator')" id="nav-dosageCalculator" class="nav-btn px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center space-x-2 transition"><i class="fa-solid fa-calculator"></i><span>Python Dosage API</span></button>
-                <button onclick="switchTab('reminders')" id="nav-reminders" class="nav-btn px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center space-x-2 transition"><i class="fa-solid fa-clock"></i><span>Reminders</span></button>
-                <button onclick="switchTab('history')" id="nav-history" class="nav-btn px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center space-x-2 transition"><i class="fa-solid fa-history"></i><span>History Logs</span></button>
-                <button onclick="switchTab('aboutProject')" id="nav-aboutProject" class="nav-btn px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 flex items-center space-x-2 transition"><i class="fa-solid fa-circle-info"></i><span>Project Info</span></button>
+        <nav class="bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto flex space-x-2 overflow-x-auto py-3 text-xs sm:text-sm font-semibold no-scrollbar">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2.5 rounded-xl bg-blue-600 text-white flex items-center space-x-2 transition shadow-lg shadow-blue-600/30"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></button>
+                <button onclick="switchTab('addMedicine')" id="nav-addMedicine" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-circle-plus"></i><span>Add Prescription</span></button>
+                <button onclick="switchTab('dosageCalculator')" id="nav-dosageCalculator" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-calculator"></i><span>Python Dosage Engine</span></button>
+                <button onclick="switchTab('reminders')" id="nav-reminders" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-clock"></i><span>Active Reminders</span></button>
+                <button onclick="switchTab('history')" id="nav-history" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-history"></i><span>Audit History</span></button>
+                <button onclick="switchTab('aboutProject')" id="nav-aboutProject" class="nav-btn px-4 py-2.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white flex items-center space-x-2 transition"><i class="fa-solid fa-shield-halved"></i><span>System Specs</span></button>
             </div>
         </nav>
     </header>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-2xl border border-slate-700 text-xs sm:text-sm font-semibold flex items-center space-x-3">
-        <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
-        <span id="toast-msg">Action completed successfully!</span>
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900 border border-slate-700 text-white px-5 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-semibold flex items-center space-x-3">
+        <div class="bg-emerald-500/20 text-emerald-400 p-1.5 rounded-full"><i class="fa-solid fa-check text-xs"></i></div>
+        <span id="toast-msg">Operation successful</span>
     </div>
 
-    <!-- MAIN CONTAINER -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- MAIN BODY -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-        <!-- SAFETY NOTICE -->
-        <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl shadow-sm flex items-start space-x-3">
-            <i class="fa-solid fa-triangle-exclamation text-amber-600 text-lg mt-0.5"></i>
+        <!-- DISCLAIMER BANNER -->
+        <div class="bg-slate-900 border border-amber-500/30 p-4 rounded-2xl shadow-lg flex items-start space-x-3.5">
+            <div class="bg-amber-500/10 p-2 rounded-xl text-amber-500"><i class="fa-solid fa-triangle-exclamation text-base"></i></div>
             <div>
-                <h3 class="text-xs font-bold uppercase tracking-wider text-amber-800">Professional Clinical Disclaimer</h3>
-                <p class="text-xs sm:text-sm text-amber-900 mt-0.5">This platform is developed for educational and demonstration purposes under multi-disciplinary academic guidelines. Always verify prescriptions with certified medical experts.</p>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">Clinical Validation Notice</h3>
+                <p class="text-xs text-slate-400 mt-0.5">Designed for academic presentation. All algorithmic values must be reviewed by licensed medical professionals prior to deployment.</p>
             </div>
         </div>
 
         <!-- DASHBOARD TAB -->
         <section id="tab-dashboard" class="tab-content space-y-6">
-            <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-slate-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
-                <div class="relative z-10">
-                    <span class="px-3 py-1 bg-blue-500 bg-opacity-30 border border-blue-400 rounded-full text-xs font-bold tracking-wider uppercase">Live Production System</span>
-                    <h2 class="text-2xl sm:text-4xl font-black mt-3">Smart Healthcare & Medication Tracker</h2>
-                    <p class="text-blue-100 text-sm mt-2 max-w-2xl">Integrated Python Flask Backend with high-performance responsive frontend architecture. Designed for precise dosage administration and tracking.</p>
+            <div class="relative bg-gradient-to-br from-blue-900/40 via-slate-900 to-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 shadow-2xl overflow-hidden">
+                <div class="relative z-10 max-w-2xl">
+                    <span class="px-3 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-full text-xs font-bold uppercase tracking-wider">Enterprise Architecture</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-4 tracking-tight">Intelligent Medicine & Dosage Automation</h2>
+                    <p class="text-slate-400 text-sm mt-3 leading-relaxed">Combining robust Python server calculations with a responsive modern UI interface to eliminate medication scheduling errors.</p>
                 </div>
-                <div class="absolute right-[-20px] bottom-[-30px] opacity-10 text-9xl">
-                    <i class="fa-solid fa-capsules"></i>
+                <div class="absolute right-[-10px] bottom-[-20px] opacity-5 text-9xl text-blue-400 pointer-events-none">
+                    <i class="fa-solid fa-pills"></i>
                 </div>
             </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                    <div class="flex items-center justify-between text-slate-500 mb-2"><span class="text-xs font-bold uppercase">Total Medicines</span><i class="fa-solid fa-pills text-blue-600"></i></div>
-                    <p id="stat-total" class="text-3xl font-black text-slate-900">0</p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-lg">
+                    <div class="flex items-center justify-between text-slate-400 mb-3"><span class="text-xs font-bold uppercase tracking-wider">Total Active</span><i class="fa-solid fa-pills text-blue-500"></i></div>
+                    <p id="stat-total" class="text-3xl font-black text-white">0</p>
                 </div>
-                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                    <div class="flex items-center justify-between text-slate-500 mb-2"><span class="text-xs font-bold uppercase">Taken Status</span><i class="fa-solid fa-circle-check text-green-600"></i></div>
-                    <p id="stat-taken" class="text-3xl font-black text-green-600">0</p>
+                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-lg">
+                    <div class="flex items-center justify-between text-slate-400 mb-3"><span class="text-xs font-bold uppercase tracking-wider">Completed</span><i class="fa-solid fa-circle-check text-emerald-500"></i></div>
+                    <p id="stat-taken" class="text-3xl font-black text-emerald-400">0</p>
                 </div>
-                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                    <div class="flex items-center justify-between text-slate-500 mb-2"><span class="text-xs font-bold uppercase">Pending Schedule</span><i class="fa-solid fa-clock-rotate-left text-amber-600"></i></div>
-                    <p id="stat-pending" class="text-3xl font-black text-amber-600">0</p>
+                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-lg">
+                    <div class="flex items-center justify-between text-slate-400 mb-3"><span class="text-xs font-bold uppercase tracking-wider">Pending</span><i class="fa-solid fa-clock-rotate-left text-amber-500"></i></div>
+                    <p id="stat-pending" class="text-3xl font-black text-amber-400">0</p>
                 </div>
-                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                    <div class="flex items-center justify-between text-slate-500 mb-2"><span class="text-xs font-bold uppercase">Next Up</span><i class="fa-solid fa-bell text-indigo-600"></i></div>
-                    <p id="stat-next" class="text-sm font-extrabold text-slate-900 mt-2 truncate">None</p>
+                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-lg">
+                    <div class="flex items-center justify-between text-slate-400 mb-3"><span class="text-xs font-bold uppercase tracking-wider">Next Scheduled</span><i class="fa-solid fa-bell text-indigo-500"></i></div>
+                    <p id="stat-next" class="text-xs font-extrabold text-white mt-1 truncate">None</p>
                 </div>
             </div>
         </section>
 
         <!-- ADD MEDICINE TAB -->
         <section id="tab-addMedicine" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 max-w-2xl mx-auto">
-                <h2 class="text-xl font-extrabold text-slate-900 mb-1">Add New Medication</h2>
-                <p class="text-xs text-slate-500 mb-6">Configure a new prescription schedule into the system repository.</p>
-                <form id="med-form" onsubmit="addMedicine(event)" class="space-y-5">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-xl mx-auto shadow-2xl">
+                <h2 class="text-xl font-bold text-white mb-1">New Prescription Entry</h2>
+                <p class="text-xs text-slate-400 mb-6">Register a medication schedule into the active database.</p>
+                <form id="med-form" onsubmit="addMedicine(event)" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Medicine Name *</label>
-                        <input type="text" id="m-name" required placeholder="e.g. Paracetamol 500mg" class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Medicine Name *</label>
+                        <input type="text" id="m-name" required placeholder="e.g. Amoxicillin 500mg" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Dosage Unit *</label>
-                            <input type="text" id="m-dosage" required placeholder="e.g. 1 Tablet / 10ml" class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Dosage Unit *</label>
+                            <input type="text" id="m-dosage" required placeholder="e.g. 1 Capsule" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Schedule Time *</label>
-                            <input type="time" id="m-time" required class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Time *</label>
+                            <input type="time" id="m-time" required class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-2xl shadow-lg transition">Save and Deploy Reminder</button>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Save Schedule</button>
                 </form>
             </div>
         </section>
 
         <!-- DOSAGE CALCULATOR TAB -->
         <section id="tab-dosageCalculator" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 max-w-2xl mx-auto">
-                <div class="flex items-center space-x-3 mb-2">
-                    <div class="bg-indigo-100 text-indigo-700 p-2.5 rounded-xl"><i class="fa-solid fa-microchip"></i></div>
-                    <h2 class="text-xl font-extrabold text-slate-900">Python Backend Dosage Engine</h2>
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-xl mx-auto shadow-2xl">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="bg-blue-600/10 text-blue-400 p-2.5 rounded-xl"><i class="fa-solid fa-microchip"></i></div>
+                    <div>
+                        <h2 class="text-lg font-bold text-white">Python API Dosage Engine</h2>
+                        <p class="text-xs text-slate-400">Server-side mathematical validation logic</p>
+                    </div>
                 </div>
-                <p class="text-xs text-slate-500 mb-6">Computes strict algorithmic dosages securely via server-side Python endpoints.</p>
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase text-slate-600 mb-1">Patient Age</label><input type="number" id="calc-age" value="25" class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:outline-none"></div>
-                        <div><label class="block text-xs font-bold uppercase text-slate-600 mb-1">Weight (kg)</label><input type="number" id="calc-weight" value="65" class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:outline-none"></div>
+                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Age</label><input type="number" id="calc-age" value="28" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Weight (kg)</label><input type="number" id="calc-weight" value="60" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase text-slate-600 mb-1">Dose Rate (mg/kg/day)</label><input type="number" id="calc-dose" value="3" class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:outline-none"></div>
-                        <div><label class="block text-xs font-bold uppercase text-slate-600 mb-1">Frequencies / Day</label><input type="number" id="calc-num" value="2" class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:outline-none"></div>
+                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Dose Rate (mg/kg/day)</label><input type="number" id="calc-dose" value="4" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Frequencies / Day</label><input type="number" id="calc-num" value="2" class="w-full px-4 py-3 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500"></div>
                     </div>
-                    <button onclick="callPythonCalculator()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-2xl shadow-lg transition">Execute Python API Calculation</button>
+                    <button onclick="callPythonCalculator()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Compute via Python Backend</button>
                 </div>
-                <div id="calc-output" class="hidden mt-6 p-5 bg-slate-900 text-white rounded-2xl text-xs space-y-2 border border-slate-800">
-                    <p id="calc-msg" class="font-bold text-blue-400 text-sm"></p>
+                <div id="calc-output" class="hidden mt-6 p-5 bg-slate-950 border border-slate-800 rounded-2xl text-xs space-y-2">
+                    <p id="calc-msg" class="font-bold text-emerald-400 text-sm"></p>
                     <p id="calc-res-daily" class="text-slate-300"></p>
                     <p id="calc-res-admin" class="text-slate-300"></p>
                 </div>
@@ -145,21 +165,21 @@
 
         <!-- REMINDERS TAB -->
         <section id="tab-reminders" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
-                <h2 class="text-xl font-extrabold text-slate-900 mb-1">Active Prescriptions & Reminders</h2>
-                <p class="text-xs text-slate-500 mb-6">Monitor active schedules and mark consumption status.</p>
-                <div id="reminders-container" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+                <h2 class="text-xl font-bold text-white mb-1">Active Reminder Schedules</h2>
+                <p class="text-xs text-slate-400 mb-6">Manage scheduled medications and record completion history.</p>
+                <div id="reminders-container" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
             </div>
         </section>
 
         <!-- HISTORY TAB -->
         <section id="tab-history" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
-                <h2 class="text-xl font-extrabold text-slate-900 mb-1">Medicine Administration History</h2>
-                <p class="text-xs text-slate-500 mb-6">Archived timeline logs of consumed medications.</p>
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+                <h2 class="text-xl font-bold text-white mb-1">Audit & Consumption History</h2>
+                <p class="text-xs text-slate-400 mb-6">Archived log records of medication administration.</p>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs">
-                        <thead><tr class="border-b text-slate-400 uppercase font-bold"><th class="py-3">Medicine Name</th><th class="py-3">Timestamp</th><th class="py-3">Status</th></tr></thead>
+                        <thead><tr class="border-b border-slate-800 text-slate-400 uppercase"><th class="py-3">Medicine Name</th><th class="py-3">Timestamp</th><th class="py-3">Status</th></tr></thead>
                         <tbody id="history-body"></tbody>
                     </table>
                 </div>
@@ -168,18 +188,18 @@
 
         <!-- ABOUT PROJECT TAB -->
         <section id="tab-aboutProject" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 space-y-4 text-xs sm:text-sm">
-                <h2 class="text-lg font-black text-slate-900">Academic Project Specifications</h2>
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl space-y-4 text-xs sm:text-sm">
+                <h2 class="text-lg font-black text-white">System Specification Summary</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                        <span class="text-slate-400 uppercase font-bold text-[10px]">Student Details</span>
-                        <p class="font-extrabold text-slate-800 text-sm mt-1">K. Sai Prasanna</p>
-                        <p class="text-slate-600 text-xs">Roll No: 25B21A4601 | CSC (Cyber Security)</p>
+                    <div class="p-5 bg-slate-950 border border-slate-800 rounded-2xl">
+                        <span class="text-slate-500 uppercase font-bold text-[10px]">Developer Identity</span>
+                        <p class="font-extrabold text-white text-base mt-1">K. Sai Prasanna</p>
+                        <p class="text-slate-400 text-xs mt-0.5">Roll No: 25B21A4601 | Department of CSC</p>
                     </div>
-                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                        <span class="text-slate-400 uppercase font-bold text-[10px]">Domain Integration</span>
-                        <p class="font-extrabold text-slate-800 text-sm mt-1">BEE + Programming + Engineering Chemistry</p>
-                        <p class="text-slate-600 text-xs">Full-stack web application with secure API communication.</p>
+                    <div class="p-5 bg-slate-950 border border-slate-800 rounded-2xl">
+                        <span class="text-slate-500 uppercase font-bold text-[10px]">Project Scope</span>
+                        <p class="font-extrabold text-white text-base mt-1">BEE + Programming + Engineering Chemistry</p>
+                        <p class="text-slate-400 text-xs mt-0.5">Full-stack web engineering & algorithmic dosage safety.</p>
                     </div>
                 </div>
             </div>
@@ -188,37 +208,37 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        <p>MediCore Pro System &copy; 2026 | Built for Excellence</p>
+    <footer class="bg-slate-900/40 border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+        <p>MediPulse Pro Enterprise System &copy; 2026 | All Rights Reserved</p>
     </footer>
 
-    <!-- SCRIPT LOGIC -->
+    <!-- SCRIPT CONTROLLER -->
     <script>
         let medicines = JSON.parse(localStorage.getItem('meds')) || [
-            { id: 1, name: 'Paracetamol 500mg', dosage: '1 Tablet', time: '09:00', status: 'Pending' },
-            { id: 2, name: 'Amoxicillin 250mg', dosage: '1 Capsule', time: '14:00', status: 'Pending' }
+            { id: 1, name: 'Paracetamol 500mg', dosage: '1 Tablet', time: '08:00', status: 'Pending' },
+            { id: 2, name: 'Multivitamin', dosage: '1 Capsule', time: '14:00', status: 'Pending' }
         ];
         let historyLogs = JSON.parse(localStorage.getItem('logs')) || [];
 
         function showToast(message) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-msg').innerText = message;
-            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.remove('translate-y-24', 'opacity-0');
             setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.add('translate-y-24', 'opacity-0');
             }, 3000);
         }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.nav-btn').forEach(el => {
-                el.classList.remove('bg-blue-600', 'text-white', 'shadow');
-                el.classList.add('hover:bg-slate-800', 'text-slate-300');
+                el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
+                el.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
             });
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`nav-${tabId}`);
-            activeBtn.classList.remove('hover:bg-slate-800', 'text-slate-300');
-            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow');
+            activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30');
             updateViews();
         }
 
@@ -236,26 +256,26 @@
 
             const rContainer = document.getElementById('reminders-container');
             if(medicines.length === 0) {
-                rContainer.innerHTML = `<p class="text-xs text-slate-400 italic col-span-3">No active schedules found.</p>`;
+                rContainer.innerHTML = `<p class="text-xs text-slate-500 italic col-span-3">No active schedules found in system.</p>`;
             } else {
                 rContainer.innerHTML = medicines.map(m => `
-                    <div class="p-5 border border-slate-200 rounded-2xl bg-slate-50 space-y-3 shadow-sm hover:border-blue-300 transition">
+                    <div class="p-5 border border-slate-800 rounded-2xl bg-slate-950 space-y-3 shadow-md hover:border-slate-700 transition">
                         <div class="flex justify-between items-start">
-                            <h3 class="font-extrabold text-slate-900 text-sm">${m.name}</h3>
-                            <span class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full text-[10px] font-bold">${m.status}</span>
+                            <h3 class="font-bold text-white text-sm">${m.name}</h3>
+                            <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full text-[10px] font-bold">${m.status}</span>
                         </div>
-                        <p class="text-xs text-slate-600"><i class="fa-solid fa-prescription-bottle-medical mr-1 text-blue-600"></i> Dosage: ${m.dosage} | Time: ${m.time}</p>
-                        <button onclick="markTaken(${m.id})" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-xl text-xs font-bold transition shadow-sm">Mark as Taken</button>
+                        <p class="text-xs text-slate-400"><i class="fa-solid fa-prescription-bottle-medical mr-1 text-blue-500"></i> ${m.dosage} &bull; ${m.time}</p>
+                        <button onclick="markTaken(${m.id})" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-xs font-bold transition shadow">Mark as Taken</button>
                     </div>
                 `).join('');
             }
 
             const hBody = document.getElementById('history-body');
             if(historyLogs.length === 0) {
-                hBody.innerHTML = `<tr><td colspan="3" class="py-4 text-slate-400 italic">No administration logs recorded yet.</td></tr>`;
+                hBody.innerHTML = `<tr><td colspan="3" class="py-4 text-slate-500 italic">No records found in audit log.</td></tr>`;
             } else {
                 hBody.innerHTML = historyLogs.map(h => `
-                    <tr class="border-b border-slate-100"><td class="py-3 font-bold text-slate-800">${h.name}</td><td class="py-3 text-slate-500">${h.time}</td><td class="py-3 font-bold text-green-600">${h.status}</td></tr>
+                    <tr class="border-b border-slate-800/60"><td class="py-3 font-bold text-white">${h.name}</td><td class="py-3 text-slate-400">${h.time}</td><td class="py-3 font-bold text-emerald-400">${h.status}</td></tr>
                 `).join('');
             }
         }
@@ -267,7 +287,7 @@
             const time = document.getElementById('m-time').value;
             medicines.push({ id: Date.now(), name, dosage, time, status: 'Pending' });
             saveData();
-            showToast("Medicine scheduled successfully!");
+            showToast("Prescription scheduled successfully");
             document.getElementById('med-form').reset();
             switchTab('reminders');
         }
@@ -279,7 +299,7 @@
                 medicines.splice(index, 1);
                 historyLogs.push({ name: med.name, time: new Date().toLocaleTimeString(), status: 'Taken' });
                 saveData();
-                showToast(`Marked ${med.name} as Taken!`);
+                showToast(`Logged consumption for ${med.name}`);
             }
         }
 
@@ -301,14 +321,14 @@
                 out.classList.remove('hidden');
                 document.getElementById('calc-msg').innerText = result.message;
                 if(result.success) {
-                    document.getElementById('calc-res-daily').innerText = `Calculated Daily Dose (Python Engine): ${result.dailyDose} mg/day`;
-                    document.getElementById('calc-res-admin').innerText = `Recommended Dose per Administration: ${result.dosePerAdmin} mg`;
+                    document.getElementById('calc-res-daily').innerText = `Daily Dosage (Python Engine): ${result.dailyDose} mg/day`;
+                    document.getElementById('calc-res-admin').innerText = `Per Administration: ${result.dosePerAdmin} mg`;
                 } else {
                     document.getElementById('calc-res-daily').innerText = '';
                     document.getElementById('calc-res-admin').innerText = '';
                 }
             } catch(err) {
-                showToast("Error communicating with Python API server.");
+                showToast("Error communicating with backend server");
             }
         }
 
@@ -325,7 +345,7 @@
                         { name: 'Calcium Supplement', time: '08:15 AM', status: 'Taken' }
                     ];
                     saveData();
-                    showToast("Demo datasets successfully loaded!");
+                    showToast("Live enterprise demo data loaded");
                 });
             }
             updateViews();
